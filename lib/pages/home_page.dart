@@ -1,9 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mushroom_finder/pages/search_results.dart';
+import 'package:flutter/foundation.dart';
+import 'package:mushroom_finder/repository/upload_repository.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key, @required this.title}) : super(key: key);
@@ -26,26 +29,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   PickedFile _image;
   bool isLoading = false;
-  _imgFromGallery() async {
-    setState(() {
-      isLoading = true;
-    });
+  _imgFromCamera() async {
     PickedFile image = (await ImagePicker()
-        .getImage(source: ImageSource.gallery, imageQuality: 50));
+        .getImage(source: ImageSource.camera, imageQuality: 50));
 
-    setState(() {
-      _image = image;
-      isLoading = false;
-    });
     Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) =>
             SearchResults(title: "Results", path_image: image.path)));
-    // widget.con.editPropic(file: File(image.path));
+  }
+
+  _imgFromGallery() async {
+    PickedFile image = (await ImagePicker()
+        .getImage(source: ImageSource.gallery, imageQuality: 50));
+
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (ctx) =>
+            SearchResults(title: "Results", path_image: image.path)));
   }
 
   bool isHover = false;
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -73,20 +80,40 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text("MushEngine",
                               style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 64,
+                                  fontSize: defaultTargetPlatform ==
+                                              TargetPlatform.iOS ||
+                                          defaultTargetPlatform ==
+                                              TargetPlatform.android
+                                      ? 38
+                                      : 64,
                                   color: Colors.grey[700]))),
                       Container(
-                          margin: EdgeInsets.only(left: 20, bottom: 20),
+                          margin: EdgeInsets.only(
+                              left:
+                                  defaultTargetPlatform == TargetPlatform.iOS ||
+                                          defaultTargetPlatform ==
+                                              TargetPlatform.android
+                                      ? 10
+                                      : 20,
+                              bottom: 20),
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage('./263888.png'))))
+                                  image: NetworkImage(defaultTargetPlatform ==
+                                              TargetPlatform.android ||
+                                          defaultTargetPlatform ==
+                                              TargetPlatform.iOS
+                                      ? "https://cdn-icons-png.flaticon.com/512/263/263888.png"
+                                      : './263888.png'))))
                     ]),
 
                     AnimatedContainer(
                         duration: Duration(milliseconds: 200),
-                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        margin: defaultTargetPlatform == TargetPlatform.iOS ||
+                                defaultTargetPlatform == TargetPlatform.android
+                            ? EdgeInsets.symmetric(horizontal: 40)
+                            : EdgeInsets.symmetric(horizontal: 20),
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -98,10 +125,47 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Border.all(width: 0.5, color: Colors.grey[400]),
                             borderRadius: BorderRadius.circular(50),
                             color: Colors.white),
-                        width: size.width / 2.5,
+                        width: defaultTargetPlatform == TargetPlatform.iOS ||
+                                defaultTargetPlatform == TargetPlatform.android
+                            ? size.width
+                            : size.width / 2.5,
                         child: InkWell(
                             onTap: () {
-                              _imgFromGallery();
+                              !(defaultTargetPlatform == TargetPlatform.iOS ||
+                                      defaultTargetPlatform ==
+                                          TargetPlatform.android)
+                                  ? _imgFromGallery()
+                                  : showModalBottomSheet(
+                                      context: context,
+                                      builder: (BuildContext bc) {
+                                        return SafeArea(
+                                          child: Container(
+                                            child: new Wrap(
+                                              children: <Widget>[
+                                                new ListTile(
+                                                    leading: new Icon(
+                                                        Icons.photo_library),
+                                                    title: new Text('Galleria'),
+                                                    onTap: () {
+                                                      _imgFromGallery();
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    }),
+                                                new ListTile(
+                                                  leading: new Icon(
+                                                      Icons.photo_camera),
+                                                  title: new Text('Fotocamera'),
+                                                  onTap: () {
+                                                    _imgFromCamera();
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      });
+                              ;
                             },
                             onHover: (bool is_hover) {
                               setState(() {

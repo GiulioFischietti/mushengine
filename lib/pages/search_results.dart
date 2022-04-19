@@ -72,6 +72,15 @@ class _SearchResultsState extends State<SearchResults> {
                       )),
                   Container(
                       alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 40, bottom: 10, top: 30),
+                      child: Text(
+                          "Search query took ${results.query_time.toStringAsFixed(4)} seconds",
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.grey[700]))),
+                  Container(
+                      alignment: Alignment.centerLeft,
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         children: [
@@ -80,203 +89,68 @@ class _SearchResultsState extends State<SearchResults> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Container(
-                                  //     alignment: Alignment.centerLeft,
-                                  //     margin:
-                                  //         EdgeInsets.only(left: 20, top: 20),
-                                  //     child: Text("Classification Results",
-                                  //         style: GoogleFonts.poppins(
-                                  //             fontWeight: FontWeight.bold,
-                                  //             fontSize: 38,
-                                  //             color: Colors.grey[700]))),
-                                  // Container(
-                                  //     alignment: Alignment.centerLeft,
-                                  //     margin: EdgeInsets.only(
-                                  //         left: 20,
-                                  //         bottom: 20,
-                                  //         top: (defaultTargetPlatform ==
-                                  //                     TargetPlatform.iOS ||
-                                  //                 defaultTargetPlatform ==
-                                  //                     TargetPlatform.android)
-                                  //             ? 10
-                                  //             : 0),
-                                  //     child: Text(
-                                  //         "Classification results obtained submitting the image",
-                                  //         style: GoogleFonts.poppins(
-                                  //             fontWeight: FontWeight.normal,
-                                  //             fontSize: 18,
-                                  //             color: Colors.grey[400]))),
-                                  // Row(
-                                  //   children: [
-                                  //     Container(
-                                  //         margin: EdgeInsets.all(20),
-                                  //         alignment: Alignment.centerLeft,
-                                  //         height: !(defaultTargetPlatform ==
-                                  //                     TargetPlatform.iOS ||
-                                  //                 defaultTargetPlatform ==
-                                  //                     TargetPlatform.android)
-                                  //             ? 220
-                                  //             : size.width / 3,
-                                  //         width: !(defaultTargetPlatform ==
-                                  //                     TargetPlatform.iOS ||
-                                  //                 defaultTargetPlatform ==
-                                  //                     TargetPlatform.android)
-                                  //             ? 220
-                                  //             : size.width / 3,
-                                  //         decoration: BoxDecoration(
-                                  //             color: Colors.red,
-                                  //             borderRadius:
-                                  //                 BorderRadius.circular(10),
-                                  //             image: DecorationImage(
-                                  //                 image: (defaultTargetPlatform ==
-                                  //                             TargetPlatform
-                                  //                                 .android ||
-                                  //                         defaultTargetPlatform ==
-                                  //                             TargetPlatform.iOS)
-                                  //                     ? FileImage(File(widget.path_image))
-                                  //                     : NetworkImage(widget.path_image),
-                                  //                 fit: BoxFit.cover))),
-                                  //     Column(
-                                  //       crossAxisAlignment:
-                                  //           CrossAxisAlignment.start,
-                                  //       children: [
-                                  //         Row(
-                                  //           children: [
-                                  //             Container(
-                                  //                 alignment:
-                                  //                     Alignment.centerLeft,
-                                  //                 margin: EdgeInsets.only(
-                                  //                     left: (defaultTargetPlatform ==
-                                  //                                 TargetPlatform
-                                  //                                     .iOS ||
-                                  //                             defaultTargetPlatform ==
-                                  //                                 TargetPlatform
-                                  //                                     .android)
-                                  //                         ? 0
-                                  //                         : 20,
-                                  //                     bottom: 20),
-                                  //                 child: Text("Class",
-                                  //                     style:
-                                  //                         GoogleFonts.poppins(
-                                  //                             fontWeight:
-                                  //                                 FontWeight
-                                  //                                     .bold,
-                                  //                             fontSize: 14,
-                                  //                             color: Colors
-                                  //                                 .grey[700]))),
-                                  //             Container(
-                                  //                 alignment:
-                                  //                     Alignment.centerLeft,
-                                  //                 margin: EdgeInsets.only(
-                                  //                     left: 10, bottom: 20),
-                                  //                 child: Text("Agaricus",
-                                  //                     style:
-                                  //                         GoogleFonts.poppins(
-                                  //                             fontWeight:
-                                  //                                 FontWeight
-                                  //                                     .normal,
-                                  //                             fontSize: 14,
-                                  //                             color: Colors
-                                  //                                 .grey[400]))),
-                                  //           ],
-                                  //         ),
-                                  //         Row(
-                                  //           children: [
-                                  //             Container(
-                                  //                 alignment:
-                                  //                     Alignment.centerLeft,
-                                  //                 margin: EdgeInsets.only(
-                                  //                     left: (defaultTargetPlatform ==
-                                  //                                 TargetPlatform
-                                  //                                     .iOS ||
-                                  //                             defaultTargetPlatform ==
-                                  //                                 TargetPlatform
-                                  //                                     .android)
-                                  //                         ? 0
-                                  //                         : 20,
-                                  //                     bottom: 20),
-                                  //                 child: Text("Confidence",
-                                  //                     style:
-                                  //                         GoogleFonts.poppins(
-                                  //                             fontWeight:
-                                  //                                 FontWeight
-                                  //                                     .bold,
-                                  //                             fontSize: 14,
-                                  //                             color: Colors
-                                  //                                 .grey[700]))),
-                                  //             Container(
-                                  //                 alignment:
-                                  //                     Alignment.centerLeft,
-                                  //                 margin: EdgeInsets.only(
-                                  //                     left: 10, bottom: 20),
-                                  //                 child: Text("70%",
-                                  //                     style:
-                                  //                         GoogleFonts.poppins(
-                                  //                             fontWeight:
-                                  //                                 FontWeight
-                                  //                                     .normal,
-                                  //                             fontSize: 14,
-                                  //                             color: Colors
-                                  //                                 .grey[400]))),
-                                  //           ],
-                                  //         ),
-                                  //         Row(
-                                  //           children: [
-                                  //             Container(
-                                  //                 alignment:
-                                  //                     Alignment.centerLeft,
-                                  //                 margin: EdgeInsets.only(
-                                  //                     left: (defaultTargetPlatform ==
-                                  //                                 TargetPlatform
-                                  //                                     .iOS ||
-                                  //                             defaultTargetPlatform ==
-                                  //                                 TargetPlatform
-                                  //                                     .android)
-                                  //                         ? 0
-                                  //                         : 20,
-                                  //                     bottom: 20),
-                                  //                 child: Text("Lorem Ipsum",
-                                  //                     style:
-                                  //                         GoogleFonts.poppins(
-                                  //                             fontWeight:
-                                  //                                 FontWeight
-                                  //                                     .bold,
-                                  //                             fontSize: 14,
-                                  //                             color: Colors
-                                  //                                 .grey[700]))),
-                                  //             Container(
-                                  //                 alignment:
-                                  //                     Alignment.centerLeft,
-                                  //                 margin: EdgeInsets.only(
-                                  //                     left: 10, bottom: 20),
-                                  //                 child: Text("Lorem Ipsum",
-                                  //                     style:
-                                  //                         GoogleFonts.poppins(
-                                  //                             fontWeight:
-                                  //                                 FontWeight
-                                  //                                     .normal,
-                                  //                             fontSize: 14,
-                                  //                             color: Colors
-                                  //                                 .grey[400]))),
-                                  //           ],
-                                  //         )
-                                  //       ],
-                                  //     )
-                                  //   ],
-                                  // )
+                                  Container(
+                                      alignment: Alignment.centerLeft,
+                                      margin:
+                                          EdgeInsets.only(left: 20, top: 20),
+                                      child: Text("Image Submitted",
+                                          style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 38,
+                                              color: Colors.grey[700]))),
+                                  Container(
+                                      alignment: Alignment.centerLeft,
+                                      margin: EdgeInsets.only(
+                                          left: 20,
+                                          bottom: 20,
+                                          top: (defaultTargetPlatform ==
+                                                      TargetPlatform.iOS ||
+                                                  defaultTargetPlatform ==
+                                                      TargetPlatform.android)
+                                              ? 10
+                                              : 0),
+                                      child: Text(
+                                          "The image that you have uploaded",
+                                          style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 18,
+                                              color: Colors.grey[400]))),
+                                  Row(
+                                    children: [
+                                      Container(
+                                          margin: EdgeInsets.all(20),
+                                          alignment: Alignment.centerLeft,
+                                          height: !(defaultTargetPlatform ==
+                                                      TargetPlatform.iOS ||
+                                                  defaultTargetPlatform ==
+                                                      TargetPlatform.android)
+                                              ? 220
+                                              : size.width / 2 - 40,
+                                          width: !(defaultTargetPlatform ==
+                                                      TargetPlatform.iOS ||
+                                                  defaultTargetPlatform ==
+                                                      TargetPlatform.android)
+                                              ? 220
+                                              : size.width / 2 - 40,
+                                          decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                  image: (defaultTargetPlatform ==
+                                                              TargetPlatform
+                                                                  .android ||
+                                                          defaultTargetPlatform ==
+                                                              TargetPlatform.iOS)
+                                                      ? FileImage(File(widget.path_image))
+                                                      : NetworkImage(widget.path_image),
+                                                  fit: BoxFit.cover))),
+                                    ],
+                                  )
                                 ],
                               )),
                         ],
                       )),
-                  Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 40, bottom: 10, top: 30),
-                      child: Text(
-                          "Query took ${results.query_time.toStringAsFixed(4)} seconds",
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.grey[700]))),
                   Container(
                       alignment: Alignment.centerLeft,
                       margin: EdgeInsets.only(left: 40, top: 20),

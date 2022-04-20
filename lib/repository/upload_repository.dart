@@ -13,7 +13,7 @@ Future<QueryResponse> uploadImage(File file) async {
         : null,
   });
   Response<Map> response = await Dio().post(
-    "http://2341-35-231-196-150.ngrok.io/uploadimage",
+    "http://31cb-34-125-62-56.ngrok.io/uploadimage",
     data: formData,
   );
   QueryResponse _results = QueryResponse(response.data);

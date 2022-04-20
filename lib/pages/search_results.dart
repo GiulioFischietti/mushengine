@@ -72,15 +72,6 @@ class _SearchResultsState extends State<SearchResults> {
                       )),
                   Container(
                       alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 40, bottom: 10, top: 30),
-                      child: Text(
-                          "Search query took ${results.query_time.toStringAsFixed(4)} seconds",
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.grey[700]))),
-                  Container(
-                      alignment: Alignment.centerLeft,
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         children: [
@@ -93,7 +84,7 @@ class _SearchResultsState extends State<SearchResults> {
                                       alignment: Alignment.centerLeft,
                                       margin:
                                           EdgeInsets.only(left: 20, top: 20),
-                                      child: Text("Image Submitted",
+                                      child: Text("Your Image",
                                           style: GoogleFonts.poppins(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 38,
@@ -110,7 +101,7 @@ class _SearchResultsState extends State<SearchResults> {
                                               ? 10
                                               : 0),
                                       child: Text(
-                                          "The image that you have uploaded",
+                                          "Basic info regarding the mushroom",
                                           style: GoogleFonts.poppins(
                                               fontWeight: FontWeight.normal,
                                               fontSize: 18,
@@ -125,15 +116,15 @@ class _SearchResultsState extends State<SearchResults> {
                                                   defaultTargetPlatform ==
                                                       TargetPlatform.android)
                                               ? 220
-                                              : size.width / 2 - 40,
+                                              : size.width / 3,
                                           width: !(defaultTargetPlatform ==
                                                       TargetPlatform.iOS ||
                                                   defaultTargetPlatform ==
                                                       TargetPlatform.android)
                                               ? 220
-                                              : size.width / 2 - 40,
+                                              : size.width / 3,
                                           decoration: BoxDecoration(
-                                              color: Colors.red,
+                                              color: Colors.grey[400],
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               image: DecorationImage(
@@ -145,6 +136,103 @@ class _SearchResultsState extends State<SearchResults> {
                                                       ? FileImage(File(widget.path_image))
                                                       : NetworkImage(widget.path_image),
                                                   fit: BoxFit.cover))),
+                                      Flexible(
+                                          child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              margin: EdgeInsets.only(
+                                                  bottom: 20,
+                                                  top: (defaultTargetPlatform ==
+                                                              TargetPlatform
+                                                                  .iOS ||
+                                                          defaultTargetPlatform ==
+                                                              TargetPlatform
+                                                                  .android)
+                                                      ? 10
+                                                      : 0),
+                                              child: RichText(
+                                                  text: TextSpan(
+                                                // Note: Styles for TextSpans must be explicitly defined.
+                                                // Child text spans will inherit styles from parent
+                                                style: const TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.black,
+                                                ),
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                      text: 'Class:  ',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16,
+                                                              color: Colors
+                                                                  .grey[700])),
+                                                  TextSpan(
+                                                      text: results
+                                                          .classificationResult
+                                                          .classname,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontSize: 16,
+                                                              color: Colors
+                                                                  .grey[700])),
+                                                ],
+                                              ))),
+                                          Container(
+                                              margin: EdgeInsets.only(
+                                                  bottom: 20,
+                                                  top: (defaultTargetPlatform ==
+                                                              TargetPlatform
+                                                                  .iOS ||
+                                                          defaultTargetPlatform ==
+                                                              TargetPlatform
+                                                                  .android)
+                                                      ? 10
+                                                      : 0),
+                                              child: RichText(
+                                                  text: TextSpan(
+                                                // Note: Styles for TextSpans must be explicitly defined.
+                                                // Child text spans will inherit styles from parent
+                                                style: const TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.black,
+                                                ),
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                      text: 'Probability:  ',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16,
+                                                              color: Colors
+                                                                  .grey[700])),
+                                                  TextSpan(
+                                                      text: (results
+                                                                  .classificationResult
+                                                                  .confidence *
+                                                              100)
+                                                          .toStringAsFixed(2),
+                                                      style: GoogleFonts
+                                                          .poppins(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontSize: 16,
+                                                              color: Colors
+                                                                  .grey[700])),
+                                                ],
+                                              ))),
+                                        ],
+                                      ))
                                     ],
                                   )
                                 ],
@@ -153,7 +241,7 @@ class _SearchResultsState extends State<SearchResults> {
                       )),
                   Container(
                       alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 40, top: 20),
+                      margin: EdgeInsets.only(left: 40, top: 40),
                       child: Text("Similar Images",
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.bold,
@@ -162,11 +250,21 @@ class _SearchResultsState extends State<SearchResults> {
                   Container(
                       alignment: Alignment.centerLeft,
                       margin: EdgeInsets.only(left: 40, bottom: 20),
-                      child: Text("Top 20 similar images",
+                      child: Text(
+                          "Top 20 similar images, with class name and score",
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.normal,
                               fontSize: 18,
                               color: Colors.grey[400]))),
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 40, bottom: 10, top: 0),
+                      child: Text(
+                          "Query took ${results.query_time.toStringAsFixed(4)} seconds",
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.grey[700]))),
                   Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: Wrap(
@@ -200,7 +298,7 @@ class _SearchResultsState extends State<SearchResults> {
                                           : 300,
                                       margin: EdgeInsets.all(20),
                                       decoration: BoxDecoration(
-                                          color: Colors.red,
+                                          color: Colors.grey[400],
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           image: DecorationImage(

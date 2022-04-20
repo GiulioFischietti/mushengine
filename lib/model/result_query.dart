@@ -5,7 +5,7 @@ class ResultQuery {
 
   ResultQuery(data) {
     this.file_class = data['file_class'];
-    this.file_name = ("http://2341-35-231-196-150.ngrok.io/static/Dataset/" +
+    this.file_name = ("http://31cb-34-125-62-56.ngrok.io/static/Dataset/" +
         (data['file_name'] as String).split("Dataset/")[1]);
     this.distance = (double.parse(data['distance']));
   }

@@ -94,6 +94,7 @@ class _SearchResultsState extends State<SearchResults> {
                                       alignment: Alignment.centerLeft,
                                       margin: EdgeInsets.only(
                                           left: 20,
+                                          right: 20,
                                           bottom: 20,
                                           top: (defaultTargetPlatform ==
                                                       TargetPlatform.iOS ||
@@ -250,7 +251,7 @@ class _SearchResultsState extends State<SearchResults> {
                               color: Colors.grey[700]))),
                   Container(
                       alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 40, bottom: 20),
+                      margin: EdgeInsets.only(left: 40, bottom: 20, right: 40),
                       child: Text(
                           "Top 20 similar images, with class name and score",
                           style: GoogleFonts.poppins(

@@ -29,6 +29,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   PickedFile _image;
   bool isLoading = false;
+
   _imgFromCamera() async {
     PickedFile image = (await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50));

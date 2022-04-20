@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mushroom_finder/model/query_response.dart';
 import 'package:mushroom_finder/model/result_query.dart';
 import 'package:mushroom_finder/pages/fullscreenimage.dart';
+import 'package:mushroom_finder/widgets/similar_result_widget.dart';
 import 'package:mushroom_finder/repository/upload_repository.dart';
 
 class SearchResults extends StatefulWidget {
@@ -257,10 +258,11 @@ class _SearchResultsState extends State<SearchResults> {
                               fontSize: 18,
                               color: Colors.grey[400]))),
                   Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 40, bottom: 10, top: 0),
+                      alignment: Alignment.centerRight,
+                      margin: EdgeInsets.only(
+                          left: 40, right: 40, bottom: 0, top: 0),
                       child: Text(
-                          "Query took ${results.query_time.toStringAsFixed(4)} seconds",
+                          "Query took ${results.query_time.toStringAsFixed(4)}s",
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -270,88 +272,8 @@ class _SearchResultsState extends State<SearchResults> {
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         children: results.resultQuery
-                            .map(
-                              (ResultQuery item) => InkWell(
-                                  onTap: () {
-                                    // widget.body['keyword'] = item;
-                                    // Navigator.of(context).push(MaterialPageRoute(
-                                    //     builder: (ctx) => SearchResults(
-                                    //           body: widget.body,
-                                    //         )));
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (ctx) => FullScreenImage(
-                                                image: item.file_name)));
-                                  },
-                                  child: Container(
-                                      height: (defaultTargetPlatform ==
-                                                  TargetPlatform.iOS ||
-                                              defaultTargetPlatform ==
-                                                  TargetPlatform.android)
-                                          ? size.width / 1.2
-                                          : 300,
-                                      width: (defaultTargetPlatform ==
-                                                  TargetPlatform.iOS ||
-                                              defaultTargetPlatform ==
-                                                  TargetPlatform.android)
-                                          ? size.width / 1.2
-                                          : 300,
-                                      margin: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[400],
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                              image:
-                                                  NetworkImage(item.file_name),
-                                              fit: BoxFit.cover)),
-                                      child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                                margin: EdgeInsets.all(10),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 5),
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey[200],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: Text(
-                                                  item.file_class,
-                                                  style: GoogleFonts.poppins(
-                                                      color: Colors.black),
-                                                )),
-                                            Expanded(child: Container()),
-                                            Container(
-                                                margin: EdgeInsets.all(10),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 5),
-                                                decoration: BoxDecoration(
-                                                    color: item.distance > 0.7
-                                                        ? Colors.green[800]
-                                                        : item.distance > 0.6
-                                                            ? Colors.yellow[800]
-                                                            : item.distance >
-                                                                    0.4
-                                                                ? Colors
-                                                                    .red[600]
-                                                                : Colors
-                                                                    .grey[200],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: Text(
-                                                  item.distance
-                                                      .toStringAsFixed(4),
-                                                  style: GoogleFonts.poppins(
-                                                      color: Colors.white),
-                                                ))
-                                          ]))),
-                            )
+                            .map((ResultQuery item) =>
+                                SimilarResultWidget(result: item))
                             .toList()
                             .cast<Widget>(),
                       ))

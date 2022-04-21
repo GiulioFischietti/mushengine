@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:mushroom_finder/model/query_response.dart';
 import 'package:mushroom_finder/model/result_query.dart';
+import 'package:mushroom_finder/repository/constants.dart';
 
 Future<QueryResponse> uploadImage(File file) async {
   String fileName = file != null ? file.path.split('/').last : "";
@@ -13,7 +14,7 @@ Future<QueryResponse> uploadImage(File file) async {
         : null,
   });
   Response<Map> response = await Dio().post(
-    "http://31cb-34-125-62-56.ngrok.io/uploadimage",
+    host,
     data: formData,
   );
   QueryResponse _results = QueryResponse(response.data);

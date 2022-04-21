@@ -1,16 +1,10 @@
-# mushroom_finder
+# MushEngine
 
 A Flutter project for the Multimedia Information Retrieval and Computer Vision Project
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The App functionalities are very basic and intended for educational purposes.
+We start from the home screen, which allows us to select an image from the gallery or from
+the camera.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

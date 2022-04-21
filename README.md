@@ -17,4 +17,11 @@ The Flutter project has the following structure:
 The App functionalities are very basic and intended for educational purposes.\
 We start from the home screen, which allows us to select an image from the gallery or from
 the camera.\
+
+![alt text](https://ibb.co/V95gj15)
+
 We can upload an image and the app will classify the mushroom in one of the most common mushroom classes, showing also a list of similar mushrooms with their class and relevancy score.
+
+![alt text](https://ibb.co/f4hn2G8)
+
+![alt text](https://ibb.co/82SvbzJ)

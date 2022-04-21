@@ -1,7 +1,7 @@
 # MushEngine
 
 A Flutter project for the Multimedia Information Retrieval and Computer Vision Project.
-Requirements:
+\nRequirements:
 - Flutter v2.5.3
 - Dart sdk: ">=2.11.0 <3.0.0" (without null-safety)
 

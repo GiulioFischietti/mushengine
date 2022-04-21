@@ -18,10 +18,10 @@ The App functionalities are very basic and intended for educational purposes.\
 We start from the home screen, which allows us to select an image from the gallery or from
 the camera.\
 
-![image](https://ibb.co/V95gj15)
+![image](https://i.ibb.co/6wLHnML/homepage-2.jpg)
 
 We can upload an image and the app will classify the mushroom in one of the most common mushroom classes, showing also a list of similar mushrooms with their class and relevancy score.
 
-![alt text](https://ibb.co/f4hn2G8)
+![alt text](https://i.ibb.co/KFMLXzN/search-results-1.jpg)
 
-![alt text](https://ibb.co/82SvbzJ)
+![alt text](https://i.ibb.co/RPVrNh1/search-results-2.jpg)

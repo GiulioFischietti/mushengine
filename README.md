@@ -1,6 +1,6 @@
 # mushroom_finder
 
-A new Flutter project.
+A Flutter project for the Multimedia Information Retrieval and Computer Vision Project
 
 ## Getting Started
 

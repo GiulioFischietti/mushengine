@@ -1,16 +1,13 @@
-# mushroom_finder
+# MushEngine
 
-A new Flutter project.
+A Flutter project for the Multimedia Information Retrieval and Computer Vision Project.\
+Requirements:
+- Flutter v2.5.3
+- Dart sdk: ">=2.11.0 <3.0.0" (without null-safety)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The App functionalities are very basic and intended for educational purposes.\
+We start from the home screen, which allows us to select an image from the gallery or from
+the camera.\
+We can upload an image and the app will classify the mushroom in one of the most common mushroom classes, showing also a list of similar mushrooms.

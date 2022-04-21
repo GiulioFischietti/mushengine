@@ -8,8 +8,8 @@ Requirements:
 ## Project Structure
 The Flutter project has the following structure:
 - repository: classes that perform http requests to the backend
-- model: model classes used in the app
-- widgets: classes regarding the widget objects in the app
+- model: model classes used in the app (query results)
+- widgets: classes regarding the graphical repeatable components in the app
 - pages: classes regarding the pages of the app
 
 ## How to use this app?
